@@ -1,37 +1,106 @@
 [project]
-name = "co_genticai"
+name = "langchain-rag"
 version = "0.1.0"
-description = "A Collaborative Agentic AI System"
+description = "LangChain-based Retrieval Augmented Generation (RAG) toolkit"
 authors = [
     {name = "ems.ameen@gmail.com"}
 ]
-packages = [{include = "co_genticai", from = "src"}]
-license = {text = "Apatche 2.0"}
+packages = [{include = "langchain_rag", from = "src"}]
+license = {text = "Apache 2.0"}
 readme = "README.md"
+requires-python = ">=3.10,<3.14"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/emsameen/langchain-ai-demo"
+"Bug Tracker" = "https://github.com/emsameen/langchain-ai-demo/issues"
+
+[project.scripts]
+langchain-rag = "langchain_rag.cli.main:main"
+
+[tool.poetry]
+name = "langchain-rag"
+version = "0.1.0"
+description = "LangChain-based Retrieval Augmented Generation (RAG) toolkit"
+authors = ["ems.ameen@gmail.com"]
+readme = "README.md"
+packages = [{include = "langchain_rag", from = "src"}]
 
 [tool.poetry.dependencies]
-python = ">=3.9,<3.9.7 || >3.9.7,<3.13"
-streamlit = "^1.32.0"
-python-dotenv = "^1.0.1"
-google-generativeai = "^0.3.2"
-loguru = "^0.7.2"
-pandas = "^2.2"
-pinecone-client = "^3.0.0"
-sentence-transformers = "^4.1.0"
+python = ">=3.10,<3.14"
 
-# LangChain Core and Plugins (Pinned)
+# Core dependencies
+python-dotenv = "^1.0.1"
+loguru = "^0.7.2"
+click = "^8.2.1"
+
+# Data Processing
+pandas = "^2.2"
+numpy = "2.2.6"
+
+# UI and Visualization
+streamlit = "^1.32.0"
+
+# LLM and RAG Core
 langchain = ">=0.1.14"
+langchain-core = "0.3.61"
 langchain-community = ">=0.0.27"
 langchain-openai = ">=0.0.8"
-langchain-huggingface = ">=0.0.5"
-langchain-pinecone = ">=0.0.3"
+
+# Vector stores and embeddings
+pinecone-client = "^3.0.0"
+
+# API integrations
+google-generativeai = "^0.3.2"
+
+# Utilities
+typing-inspection = "0.4.1"
+rpds-py = "0.25.1"
+multidict = "6.4.4"
+google-auth = "2.40.2"
+jiter = "0.10.0"
 
 [tool.poetry.group.dev.dependencies]
+# Linting and Formatting
 black = "^24.1.0"
 isort = "^5.13.2"
+flake8 = "^7.0.0"
+mypy = "^1.5.1"
+
+# Testing
 pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+
+# Documentation
+mkdocs = "^1.5.3"
+mkdocs-material = "^9.4.6"
+
 
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+# Additional tool configuration
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
